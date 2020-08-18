@@ -9,40 +9,22 @@
 	</head>
 	<body>
 		<div id="app" v-bind:style="{background: '#' + color}">
-			<h1 v-bind:class="changePercent ? 'green' : 'red'">{{ title }}</h1>
+			<coin-detail v-bind:coin="btc" v-on:change-color="updateColor">
+				<template v-slot:text>
+					<p>
+						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi optio
+						libero sapiente, dolorem quos temporibus fugiat numquam quasi
+						aperiam sed, ratione veritatis officia laborum voluptatibus
+						voluptatem natus? Minima, maiores deleniti!
+					</p>
+				</template>
 
-			<img
-				v-on:mouseover="toggleShowPrices"
-				v-on:mouseout="toggleShowPrices"
-				v-bind:src="img"
-				v-bind:alt="name"
-			/>
-
-			<span v-if="changePercent > 0">👍</span>
-
-			<span v-else-if="changePercent < 0">👎</span>
-
-			<span v-else>🤞</span>
-
-			<span v-on:click="toggleShowPrices"
-				>{{showPrices ? 'Ocultar Precios' : 'Ver Precios'}}
-			</span>
-
-			<ul v-show="showPrices">
-				<li
-					class="uppercase"
-					v-bind:class="{ orange: p.value == price, red: p.value < price, green: p.value > price }"
-					v-for="(p, i) in pricesWithDate"
-					v-bind:key="p.day"
-				>
-					{{ i + 1 }} - {{ p.day }} - {{ p.value }}
-				</li>
-			</ul>
-
-			<input type="number" v-model="value" />
-			<span>{{ convertedValue }}</span>
+				<template v-slot:link>
+					<a href="#">Link</a>
+				</template>
+			</coin-detail>
 		</div>
-
+		
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 		<script src="app.js"></script>
 	</body>
